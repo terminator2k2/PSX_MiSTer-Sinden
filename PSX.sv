@@ -59,6 +59,7 @@ module emu
 	input  [11:0] HDMI_HEIGHT,
 	output        HDMI_FREEZE,
 	output        HDMI_BLACKOUT,
+	output        gun_border_en,
 
 `ifdef MISTER_FB
 	// Use framebuffer in DDRAM
@@ -183,6 +184,7 @@ assign {UART_RTS, UART_TXD, UART_DTR} = 0;
 
 assign AUDIO_S   = 1;
 assign AUDIO_MIX = status[8:7];
+assign gun_border_en = status[29];
 
 assign LED_USER  = exe_download | bk_pending;
 assign LED_DISK  = 0;
@@ -385,6 +387,7 @@ parameter CONF_STR = {
 	"P1-;",
 	"P1O[33:32],Aspect ratio,Original,Full Screen,[ARC1],[ARC2];",
 	"P1O[35:34],Scale,Normal,V-Integer,Narrower HV-Integer,Wider HV-Integer;",
+	"P1OT,Sinden Boarder,Off,On;",
 	"P1-;",
 	"DEP1O[62],Fixed HBlank,On,Off;",
 	"DEP1O[55],Fixed VBlank,Off,On;",
