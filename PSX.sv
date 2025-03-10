@@ -59,7 +59,7 @@ module emu
 	input  [11:0] HDMI_HEIGHT,
 	output        HDMI_FREEZE,
 	output        HDMI_BLACKOUT,
-	output        gun_border_en,
+	output        GUN_BORDER_EN,
 
 `ifdef MISTER_FB
 	// Use framebuffer in DDRAM
@@ -184,7 +184,7 @@ assign {UART_RTS, UART_TXD, UART_DTR} = 0;
 
 assign AUDIO_S   = 1;
 assign AUDIO_MIX = status[8:7];
-assign gun_border_en = status[29];
+assign GUN_BORDER_EN = status[29];
 
 assign LED_USER  = exe_download | bk_pending;
 assign LED_DISK  = 0;
