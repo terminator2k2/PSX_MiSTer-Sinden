@@ -1,0 +1,23 @@
+name: CI Build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build
+      run: set -o pipefail && curl --fail --location https://raw.githubusercontent.com/terminator2k2/Build-Automation_MiSTer/refs/heads/main/build.sh | bash -
+      env:
+        CORE_NAME: PSX_DualSDRAM
+        COMPILATION_COMMAND: /opt/intelFPGA_lite/quartus/bin/quartus_sh --flow compile PSX_DualSDRAM.qpf
+        COMPILATION_OUTPUT: output_files/PSX_DualSDRAM.rbf
+        RELEASE_TAG: Sinden-LightGun-Cores
+        REPOSITORY: ${{ github.repository }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DISPATCH_TOKEN: ${{ secrets.BUILD_AUTOMATION_DISPATCH_TOKEN }}
